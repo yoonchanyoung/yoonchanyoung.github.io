@@ -22,7 +22,7 @@ body {
     font-size: 17px;
     color: #333;
     line-height: 1.6; 
-    overflow: hidden;
+    
 }
 
 #showcase {
@@ -77,9 +77,9 @@ body {
     text-align: center;
 }
 
-.modal, .modal2  {
+.modal  {
 
-
+    
     display: flex;
     
     justify-content: center;
@@ -119,8 +119,7 @@ video {
 
 
 
-.play,
-.play2
+.play
  {
    
     color: #fff;
@@ -134,8 +133,7 @@ video {
    
 }
 
-.play-juice,
-.play-juice2
+.play-juice
 {
     height: 2.5px;
     background: #fff;
@@ -157,9 +155,7 @@ ul {
 }
 
 
-.modal-button:hover,
-.modal-button2:hover
-
+.modal-button:hover
 {
 
     background: #333;
@@ -170,9 +166,6 @@ ul,li {
     width: 100%;
 }
 
-li::before {
-
-}
 
 
 .active { 
@@ -228,7 +221,7 @@ li::before {
     <div class="modal">
         <div class="video-container">  
 
-                <video id="v1" src="" ></video>
+                <video id="v1" src="" autoplay></video>
                 
                 <span class="play">pause
                     <img src="" alt="">
@@ -243,20 +236,17 @@ li::before {
 
 
     <section id="a">
-        <ul class="works">
-            <ul class="worklist">
-
-                <li class="modal-button">
-                        <h2>01.Learn Vanilla Javascript- Memory Game Tutorial - Intro [0_11]</h2>
+       
+            <ul class="worklist"><li class="modal-button">
+                        <h2>first</h2>
                 </li>
                 <li class="modal-button">
                         <h2>$RMXA0AD</h2>
                 </li>
                 <li class="modal-button">
-                        <h2>01.Build a JavaScript breakout game with Phaser- Level 0 (1_14)</h2>
-                </li>
-            </ul>
-        </ul>
+                        <h2>last</h2>
+                </li></ul>
+        
      
     </section>
 
@@ -281,8 +271,15 @@ const gauge = document.querySelector('.play-juice');
 
 
 const modal = document.querySelector('.modal');
-const modalBtn = document.querySelectorAll('.modal-button');
+// const modalBtn = document.querySelectorAll('.modal-button');
 const active = document.querySelector('.active');
+const workList = document.querySelector('.worklist');
+
+
+
+
+
+ var videos = [].slice.call(document.querySelectorAll(".modal-button"));
 
 
 
@@ -292,28 +289,62 @@ trigger = function(){
     this.classList.add('active');
     
     video.src = 'src/'+this.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()+'.mp4'
-   
-    setTimeout(openModal,500);
+    
+    modal.style.visibility = 'visible';
+    
     
 
-    modal.addEventListener('pause',_=>{
+    video.addEventListener('pause',_=>{
         this.classList.remove('active');
     });
     
+    
+ //  if(this.nextElementSibling == null){
+ //  
+ //  modal.style.visibility = 'hidden';
+ //  playPause.style.visibility = 'hidden';
+ //  this.classList.remove('active');
+ //  return;
+ //  }
+   
+    
+
+    
+    console.log(this.nextElementSibling);
+     
+    if(this.nexElementSibling == null){
+        video.addEventListener('ended',_=>{
+            video.pause();
+       })}
+   
     video.addEventListener('ended',_=>{
 
-            modal.style.visibility = 'hidden';
-            playPause.style.visibility = 'hidden';
-            this.classList.remove('active');
-            
+       modal.style.visibility = 'hidden';
+       playPause.style.visibility = 'hidden';
+      
+       this.classList.remove('active');
 
-            this.nextElementSibling.click();
-            
+      
+
+       
+       this.nextElementSibling.click();
+
+       
     });
-    
-}
 
-Array.from(modalBtn,c=>c.addEventListener('click',trigger));
+
+}    
+
+ Array.prototype.forEach.call(videos,c=>c.addEventListener('click',trigger));
+
+
+// var nodesArray = Array.prototype.slice.call(document.querySelectorAll(".modal-button"));
+
+
+// Array.from(modalBtn,c=>c.addEventListener('click',trigger));
+
+
+
 
 
 openModal  = function() {
@@ -321,32 +352,23 @@ openModal  = function() {
     video.play();
     
 }
-
-videoEnd = function(){
-
-            modal.style.visibility = 'hidden';
-            playPause.style.visibility = 'hidden';
-
-                
-
-}
 closeModal = function(e){
     
-    if(e.target == modal){
+        if(e.target == modal){
             modal.style.visibility = 'hidden';
             playPause.style.visibility = 'hidden';
             video.pause();
-           
-            };
-}
+}};
+            
+
 
 modal.addEventListener('click',closeModal);
  
     
-        
 video.addEventListener('click',_=>{
+
     if(video.paused){
-       playPause.innerHTML = 'pause';
+        playPause.innerHTML = 'pause';
        
         video.play();
     } else {
