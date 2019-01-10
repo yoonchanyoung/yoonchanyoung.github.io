@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+
+* {
+    padding: 0;
+    margin: 0;
+   
+}
+
+body {
+    background: #fff;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #333;
+    line-height: 1.6; 
+    overflow: hidden;
+}
+
+#showcase {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 90vh;
+
+    padding: 50px;
+    text-align: center;
+    
+    
+}
+#showcase h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    padding: .5rem;
+    
+}
+
+#showcase p {
+    font-size: 1rem;
+}
+
+#showcase .showcase-button {
+    font-size: 10px;
+    text-decoration: none;
+    color:#333;
+    border: #333 1px solid;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+#showcase .showcase-button:hover {
+    color:white;
+    background: black;
+}
+
+#a {
+    background: #fff;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+
+    padding: 0px;
+    text-align: center;
+}
+
+.modal, .modal2  {
+
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    position: fixed;
+    padding: 0px;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+   
+}
+/*
+.modal-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+*/
+
+
+.video-container {
+
+    
+    max-width: 900px;
+    width: 100%;
+}
+
+video {
+    
+    width: 100%;
+    }
+
+
+
+.play,
+.play2
+ {
+   
+    color: #fff;
+    position : absolute;
+    visibility: hidden;
+    }
+
+.video-container img {
+   
+    width: 20px;
+   
+}
+
+.play-juice,
+.play-juice2
+{
+    height: 2.5px;
+    background: #fff;
+    
+    
+}
+
+
+
+.type-writer-container{
+    font-size: .6rem;
+
+}
+.txt-type > .txt{
+    border-right: 0.1rem solid #333;
+}
+ul {
+    list-style: none;
+}
+
+
+.modal-button:hover,
+.modal-button2:hover
+
+{
+
+    background: #333;
+    color: #fff;
+}
+
+ul,li {
+    width: 100%;
+}
+
+li::before {
+
+}
+
+
+.active { 
+
+    background: coral;
+    color: #fff;
+        
+}
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+
+    <div id="showcase">
+
+        <h1>Yoon Chan Young</h1>
+        
+   
+
+        <div class="type-writer-container">
+                <p>
+                   <span class="txt-type" data-wait="3000" 
+                   data-words='[" User Interface Designer","Front-end Developer"]'></span>
+                </p>
+                <h2 class="txt-type2"></h2>
+                </div>
+        
+
+        <a href="#a" class="showcase-button">Get to know</a>
+    </div>
+
+
+
+
+
+    <div class="modal">
+        <div class="video-container">  
+
+                <video id="v1" src="" ></video>
+                
+                <span class="play">pause
+                    <img src="" alt="">
+                </span>
+                <div class="play-juice"></div>
+        </div>  
+    </div>
+
+
+
+
+
+
+    <section id="a">
+        <ul class="works">
+            <ul class="worklist">
+
+                <li class="modal-button">
+                        <h2>01.Learn Vanilla Javascript- Memory Game Tutorial - Intro [0_11]</h2>
+                </li>
+                <li class="modal-button">
+                        <h2>$RMXA0AD</h2>
+                </li>
+                <li class="modal-button">
+                        <h2>01.Build a JavaScript breakout game with Phaser- Level 0 (1_14)</h2>
+                </li>
+            </ul>
+        </ul>
+     
+    </section>
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+    </script>
+  
+  
+<script>
+
+const showCaseBtn = document.querySelector('.showcase-button');
+const videoContainer = document.querySelector('.video-container');
+;
+const playPause = document.querySelector('.play');
+const video = document.querySelector('video');
+const html = document.querySelector('*');
+const gauge = document.querySelector('.play-juice');
+
+
+
+const modal = document.querySelector('.modal');
+const modalBtn = document.querySelectorAll('.modal-button');
+const active = document.querySelector('.active');
+
+
+
+
+trigger = function(){
+    
+    this.classList.add('active');
+    
+    video.src = 'src/'+this.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()+'.mp4'
+   
+    setTimeout(openModal,500);
+    
+
+    modal.addEventListener('pause',_=>{
+        this.classList.remove('active');
+    });
+    
+    video.addEventListener('ended',_=>{
+
+            modal.style.visibility = 'hidden';
+            playPause.style.visibility = 'hidden';
+            this.classList.remove('active');
+            
+
+            this.nextElementSibling.click();
+            
+    });
+    
+}
+
+Array.from(modalBtn,c=>c.addEventListener('click',trigger));
+
+
+openModal  = function() {
+    modal.style.visibility = 'visible';
+    video.play();
+    
+}
+
+videoEnd = function(){
+
+            modal.style.visibility = 'hidden';
+            playPause.style.visibility = 'hidden';
+
+                
+
+}
+closeModal = function(e){
+    
+    if(e.target == modal){
+            modal.style.visibility = 'hidden';
+            playPause.style.visibility = 'hidden';
+            video.pause();
+           
+            };
+}
+
+modal.addEventListener('click',closeModal);
+ 
+    
+        
+video.addEventListener('click',_=>{
+    if(video.paused){
+       playPause.innerHTML = 'pause';
+       
+        video.play();
+    } else {
+        playPause.innerHTML = 'play';
+      
+        video.pause();
+    }
+});
+    
+       
+        
+       $(video).mousemove(function(e){
+             
+              playPause.style.visibility = 'visible';
+            $(playPause).css({left:e.clientX + 10, top:e.clientY +10});
+        })
+        
+        
+        $(video).mouseover(function(e){
+            
+              playPause.style.visibility = 'visible';
+            $(playPause).css({left:e.clientX + 10, top:e.clientY +10});
+        })
+        
+        
+        
+        video.addEventListener('mouseleave', ()=>{
+          
+            playPause.style.visibility = 'hidden';
+          
+        })
+        
+    
+        
+        video.addEventListener('timeupdate', ()=>{
+            let gaugeNo = video.currentTime / video.duration;
+            gauge.style.width = gaugeNo * 100  + "%";
+        })
+        
+     
+    
+
+
+    
+    
+    
+    
+    
+
+
+
+
+
+//typeWriter
+
+const typeWriter = function(txtElement,words,wait=3000){
+
+this.txtElement = txtElement;
+this.words = words;
+this.txt='';
+this.wordIndex = 0;
+this.wait = parseInt(wait, 10);
+this.type();
+this.isDeleting = false;
+}
+
+typeWriter.prototype.type = function(){
+
+    const current = this.wordIndex % this.words.length;
+    const fullTxt = this.words[current];
+    
+    
+    if(this.isDeleting){
+        this.txt = fullTxt.substring(0,this.txt.length -1);
+    }else{
+        this.txt = fullTxt.substring(0,this.txt.length +1);
+    }
+    this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
+    
+    let typeSpeed = 100;
+    
+    if (this.isDeleting){
+        typeSpeed /= 3;
+    }
+
+    if (!this.isDeleting && this.txt===fullTxt){
+        typeSpeed = this.wait;
+        this.isDeleting = true;
+
+    } else if( this.isDeleting && this.txt === ''){
+        this.isDeleting = false;
+        this.wordIndex++;
+        typeSpeed = 500;
+    }
+    
+    setTimeout( () => this.type(),typeSpeed);
+}
+
+document.addEventListener('DOMContentLoaded',init);
+
+function init(){
+    const txtElement = document.querySelector('.txt-type');
+    const words = JSON.parse(txtElement.getAttribute('data-words'));
+    const wait = txtElement.getAttribute('data-wait');
+
+    new typeWriter(txtElement,words,wait);
+}
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
