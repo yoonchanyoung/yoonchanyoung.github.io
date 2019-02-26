@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+
+* {
+    padding: 0;
+    margin: 0;
+   
+}
+
+body {
+    background: #fff;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #333;
+    line-height: 1.6; 
+    
+}
+
+#showcase {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 90vh;
+
+    padding: 50px;
+    text-align: center;
+    
+    
+  
+}
+#showcase h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    padding: .5rem;
+   
+    
+    
+
+}
+
+#showcase p {
+    font-size: 1rem;
+}
+
+#showcase .showcase-button {
+    font-size: 10px;
+    text-decoration: none;
+    color:#333;
+    border: #333 1px solid;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+#showcase .showcase-button:hover {
+    color:white;
+    background: black;
+}
+
+#a {
+    background: #fff;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+
+    padding: 0px;
+    text-align: center;
+
+
+
+
+}
+
+.modal  {
+   
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    position: fixed;
+    padding: 0px;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+   
+}
+
+
+
+/*
+.modal-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+*/
+
+
+.video-container {
+
+
+    max-width: 900px;
+    width: 100%;
+}
+
+
+@keyframes fadeIn {
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+
+
+.video-container img {
+   
+   width: 20px;
+
+}
+
+
+video {
+    
+    width: 100%;
+    
+    }
+
+.play
+ {
+   
+    color: #fff;
+    position : absolute;
+    visibility: hidden;
+    }
+
+
+.play-juice
+{
+    height: 2.5px;
+    background: #fff;
+      
+}
+
+
+
+ul {
+    list-style: none;
+}
+
+.modal-button {
+    
+}
+
+
+.modal-button:hover
+{
+    background: #333;
+    color: #fff;
+}
+
+
+
+ul,li {
+    width: 100%;
+}
+
+.active { 
+   
+    background: coral;
+    color: #fff;
+
+}
+.deactive {
+    background: #fff;
+    color: #333;
+}
+
+@keyframes colors{
+
+from{ background: #fff;
+    color: #333;}
+
+to{ background: #333;
+    color: #fff;}
+
+}
+
+
+
+.type-writer-container{
+    font-size: .6rem;
+
+}
+.txt-type > .txt{
+    border-right: 0.1rem solid #333;
+}
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+
+    <div id="showcase">
+
+        <h1>Yoon Chan Young</h1>
+        
+   
+
+        <div class="type-writer-container">
+                <p>
+                   <span class="txt-type" data-wait="3000" 
+                   data-words='[" User Interface Designer","Front-end Developer"]'></span>
+                </p>
+                <h2 class="txt-type2"></h2>
+                </div>
+        
+
+        <a href="#a" class="showcase-button">Get to know</a>
+    </div>
+
+
+
+
+
+    <div class="modal">
+        <div class="video-container">  
+
+                <video src=""></video>
+                
+                <span class="play">pause
+                    <img src="" alt="">
+                </span>
+                <div class="play-juice"></div>
+        </div>  
+    </div>
+
+
+
+
+
+
+    <section id="a">
+       
+            <ul class="worklist">
+                <li class="modal-button" id="first-video"><h2>first</h2></li>
+                <li class="modal-button"><h2>$RMXA0AD</h2></li>
+                <li class="modal-button"><h2>last</h2></li>
+                <li class="modal-button"><h2>muuto</h2></li>
+                <li class="modal-button"><h2>maiori</h2></li>
+            </ul>
+        
+     
+    </section>
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+    </script>
+  
+  
+<script>
+
+const showCaseBtn = document.querySelector('.showcase-button');
+const videoContainer = document.querySelector('.video-container');
+
+const playPause = document.querySelector('.play');
+const video = document.querySelector('video');
+const html = document.querySelector('*');
+const gauge = document.querySelector('.play-juice');
+
+
+
+const modal = document.querySelector('.modal');
+const modalBtn = document.querySelectorAll('.modal-button');
+const active = document.querySelector('.active');
+const workList = document.querySelector('.worklist');
+const firstVideo = document.querySelector('#first-video');
+
+
+var list = [].slice.call(document.querySelectorAll(".modal-button"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// make array
+
+// var videos = [].slice.call(document.querySelectorAll(".modal-button"));
+
+//  add event for each item
+
+//   Array.prototype.forEach.call(videos,c=>c.addEventListener('click',()=>{
+//
+//        
+//      video.style.animation ='fadeIn 2s 2s both';
+//      setTimeout(_=>{
+//          video.style.animation = '';
+//      },4000)  
+//    
+//      console.log(this);
+//      
+//
+//      video.src = 'src/'+e.target.textContent+'.mp4'
+//      
+//      modal.style.visibility = 'visible';     
+//      video.play();
+//
+//     // last video filename
+//    
+//      
+//      // get current video filename
+//   
+//
+//     video.addEventListener('ended',_=>{
+//          
+//        
+//        modal.style.visibility = 'hidden';
+//
+//        console.log(e.target.parentElement.nextElementSibling);
+//         
+//       
+//        video.src = 'src/'+e.target.parentElement.nextSibling.textContent+'.mp4'
+//      
+//        
+//
+//        video.style.animation ='fadeIn 2s both'; 
+//             
+//        modal.style.visibility = 'visible';     
+//        video.play();
+//        setTimeout(_=>{
+//          video.style.animation = '';
+//        },4000) 
+//
+//
+//        var url = video.src;
+//        var filename = url.substring(url.lastIndexOf('/')+1);
+//        
+//        var currentVideo = filename.slice(0,-4);
+//        var lastVideo = workList.lastChild.textContent;
+//
+//        if(currentVideo == lastVideo){
+//            console.log('this last video');
+//            video.stop();
+//        }
+//
+//        
+//      });
+//        
+//      }));
+
+
+
+
+
+
+
+
+
+//  
+//  
+//  trigger = function(){
+//      
+//  
+//      video.style.animation ='fadeIn 2s 2s both';
+//  
+//      this.classList.add('active');
+//      console.log(this);
+//      video.src = 'src/'+this.textContent.replace(/[\n\r]+|//  [\s]{2,}/g, ' ').trim()+'.mp4'
+//      
+//  
+//      video.play();
+//  
+//  
+//      video.addEventListener('pause',_=>{
+//          this.classList.remove('active');
+//         
+//      });
+//      
+//      
+//      modal.style.visibility = 'visible';
+//      
+//      
+//       
+//      if(this.nexElementSibling == null){
+//          video.addEventListener('ended',_=>{
+//              video.pause();
+//         })}
+//     
+//      video.addEventListener('ended',_=>{
+//  
+//         modal.style.visibility = 'hidden';
+//         playPause.style.visibility = 'hidden';
+//          
+//  
+//         this.classList.remove('active');
+//          video.style.animation = '';
+//      
+//        //  this.nextElementSibling.click();
+//     
+//        this.nextSibling.click(); 
+//  
+//         
+//      });
+//  
+//  
+//  }    
+//  
+//  
+
+
+// var nodesArray = Array.prototype.slice.call(document.querySelectorAll(".modal-button"));
+
+
+// Array.from(modalBtn,c=>c.addEventListener('click',trigger));
+
+
+
+
+
+
+
+
+
+
+openModal  = function() {
+    modal.style.visibility = 'visible';
+    video.play();
+    
+}
+
+    
+video.addEventListener('click',_=>{
+
+    if(video.paused){
+        playPause.innerHTML = 'pause';
+       
+        video.play();
+    } else {
+        playPause.innerHTML = 'play';
+      
+        video.pause();
+    }
+});
+    
+       
+        
+$(video).mousemove(function(e){
+             
+              playPause.style.visibility = 'visible';
+            $(playPause).css({left:e.clientX + 10, top:e.clientY +10});
+        })
+        
+        
+$(video).mouseover(function(e){
+            
+              playPause.style.visibility = 'visible';
+            $(playPause).css({left:e.clientX + 10, top:e.clientY +10});
+        })
+        
+
+        
+video.addEventListener('mouseleave', ()=>{
+          
+            playPause.style.visibility = 'hidden';
+          
+        })
+        
+    
+        
+video.addEventListener('timeupdate', ()=>{
+            let gaugeNo = video.currentTime / video.duration;
+            gauge.style.width = gaugeNo * 100  + "%";
+        })
+        
+     
+ 
+modal.addEventListener('click',(e)=>{
+
+    if(e.target === modal){
+    modal.style.visibility = 'hidden';
+    playPause.style.visibility = 'hidden';
+    video.pause();
+
+    
+
+}
+});
+
+    
+    
+    
+Array.from(modalBtn,c=>c.addEventListener('click',_=>{
+    
+  
+    video.src = 'src/'+ c.textContent + '.mp4';
+
+    modal.style.animation = 'fadeIn 1s 1s both';
+    
+    video.play();
+    
+    setTimeout(_=>{
+    modal.style.animation = '';
+    },4000)  
+
+
+
+    modal.style.visibility = 'visible'
+    
+    
+   
+
+
+if(c.nextElementSibling===null){
+            video.addEventListener('ended',_=>{
+            video.pause();
+            })
+        } ; 
+
+
+video.addEventListener('ended',_=>{
+      
+   
+
+        modal.style.visibility = 'hidden';
+        
+        c.nextElementSibling.click();
+
+        
+   
+
+
+    })
+
+
+}));
+
+
+
+
+showCaseBtn.addEventListener('click',_=>{
+firstVideo.click();
+
+})
+
+
+
+
+
+
+
+//typeWriter
+
+ //  const typeWriter = function(txtElement,words,wait=3000){
+ //  
+ //  this.txtElement = txtElement;
+ //  this.words = words;
+ //  this.txt='';
+ //  this.wordIndex = 0;
+ //  this.wait = parseInt(wait, 10);
+ //  this.type();
+ //  this.isDeleting = false;
+ //  }
+ //  
+ //  typeWriter.prototype.type = function(){
+ //  
+ //      const current = this.wordIndex % this.words.length;
+ //      const fullTxt = this.words[current];
+ //      
+ //      
+ //      if(this.isDeleting){
+ //          this.txt = fullTxt.substring(0,this.txt.length -1);
+ //      }else{
+ //          this.txt = fullTxt.substring(0,this.txt.length +1);
+ //      }
+ //      this.txtElement.innerHTML = `<span class="txt">${this.txt} //  </span>`;
+ //      
+ //      let typeSpeed = 100;
+ //      
+ //      if (this.isDeleting){
+ //          typeSpeed /= 3;
+ //      }
+ //  
+ //      if (!this.isDeleting && this.txt===fullTxt){
+ //          typeSpeed = this.wait;
+ //          this.isDeleting = true;
+ //  
+ //      } else if( this.isDeleting && this.txt === ''){
+ //          this.isDeleting = false;
+ //          this.wordIndex++;
+ //          typeSpeed = 500;
+ //      }
+ //      
+ //      setTimeout( () => this.type(),typeSpeed);
+ //  }
+ //  
+ //  document.addEventListener('DOMContentLoaded',init);
+ //  
+ //  function init(){
+ //      const txtElement = document.querySelector('.txt-type');
+ //      const words = JSON.parse(txtElement.getAttribute('data-words'));
+ //      const wait = txtElement.getAttribute('data-wait');
+ //  
+ //      new typeWriter(txtElement,words,wait);
+ //  }
+ //  
+ //  
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
