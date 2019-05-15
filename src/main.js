@@ -12,6 +12,7 @@ const modalBtn = document.querySelectorAll('.modal-button');
 const active = document.querySelector('.active');
 const workList = document.querySelector('.worklist');
 const firstVideo = document.querySelector('#first-video');
+const lastVideo = document.querySelector('#last-video');
 const body= document.querySelector('body');
 
 var list = [].slice.call(document.querySelectorAll(".modal-button"));
@@ -53,13 +54,13 @@ $(video).mouseover(function(e){
               playPause.style.visibility = 'visible';
             $(playPause).css({left:e.clientX + 10, top:e.clientY +10});
         })
-        
+
 
         
 video.addEventListener('mouseleave', ()=>{
           
-            playPause.style.visibility = 'hidden';
-          
+          playPause.style.visibility = 'hidden';
+      
         })
         
     
@@ -71,6 +72,10 @@ video.addEventListener('timeupdate', ()=>{
         
      
  
+
+
+
+
 modal.addEventListener('click',(e)=>{
 
     if(e.target === modal){
@@ -120,6 +125,7 @@ $(window).scroll(function() {
     if(c.nextElementSibling===null){
             video.addEventListener('ended',_=>{
             video.pause();
+            console.log('nommoreviedeo');
             })
         } ; 
 
@@ -155,7 +161,9 @@ firstVideo.click();
 
 })
 
-
+lastVideo.addEventListener('click',_=>{
+ console.log('done');
+})
 
 
 

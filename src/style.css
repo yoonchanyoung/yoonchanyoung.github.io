@@ -1,12 +1,12 @@
 
 ::-webkit-scrollbar {
     width: 5px;
-    background: red;
+    background: white;
 }
 
 
 ::-webkit-scrollbar-thumb {
-    background: aqua;
+    background: black;
 }
 
 
