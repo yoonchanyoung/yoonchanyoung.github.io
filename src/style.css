@@ -149,7 +149,7 @@ video {
 .play
  {
    
-    color: #fff;
+    color: rgb(202, 202, 202);
     position : absolute;
     visibility: hidden;
     }
